@@ -1,6 +1,6 @@
 var app = angular.module('app', []);
 
-app.controller('Ctrl', ['$scope', '$interval', '$q', '$timeout', function($scope, $interval, $q, $timeout){
+app.controller('Ctrl', ['$scope', '$interval', '$q', function($scope, $interval, $q){
 
 	$scope.randomWorkProgress = 'Working';
 	$scope.finished           = false;
