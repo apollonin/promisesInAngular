@@ -1,18 +1,23 @@
 var app = angular.module('app', []);
 
-app.controller('Ctrl', ['$scope', '$interval', function($scope, $interval){
+app.controller('Ctrl', ['$scope', '$interval', '$q', function($scope, $interval, $q){
 
 	$scope.randomWorkProgress = 'Working';
 	$scope.finished           = false;
-	
+
 	function randomWork(){
 		var count = Math.floor(Math.random() * 6 + 5);
 
-		$interval(function(){
+		$promise =  $interval(function(){
 			$scope.randomWorkProgress += '.';
 		}, 500, count);
-	}	
 
-	randomWork();
+		return $promise;
+	}
+
+	var promise = randomWork();
+	promise.then(function() {
+		$scope.finished = true;
+	});
 
 }]);
