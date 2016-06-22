@@ -8,10 +8,16 @@ app.controller('Ctrl', ['$scope', '$interval', '$q', function($scope, $interval,
 	function randomWork(){
 		var deferred = $q.defer(),
 			promise = deferred.promise,
-			count = Math.floor(Math.random() * 6 + 5);
+			count = Math.floor(Math.random() * 6 + 5),
+			iteration = 0;
 
-		promise = $interval(function(){
+		$interval(function(){
+			iteration ++;
 			$scope.randomWorkProgress += '.';
+
+			if ( iteration == count ) {
+				deferred.resolve();
+			}
 		}, 500, count);
 
 		return promise;
