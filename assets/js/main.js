@@ -6,13 +6,15 @@ app.controller('Ctrl', ['$scope', '$interval', '$q', function($scope, $interval,
 	$scope.finished           = false;
 
 	function randomWork(){
-		var count = Math.floor(Math.random() * 6 + 5);
+		var deferred = $q.defer(),
+			promise = deferred.promise,
+			count = Math.floor(Math.random() * 6 + 5);
 
-		$promise =  $interval(function(){
+		promise = $interval(function(){
 			$scope.randomWorkProgress += '.';
 		}, 500, count);
 
-		return $promise;
+		return promise;
 	}
 
 	var promise = randomWork();
